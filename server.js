@@ -15,6 +15,8 @@ sockets.on('connection', (socket) => {
   const playerId = socket.id
   console.log('New player connected:', playerId)
 
+  game.addPlayer({playerId})
+
   socket.emit('setup', game.state)
 })
 
