@@ -11,21 +11,14 @@ keyboardListener.subscribe(game.movePlayer)
 
 renderScreen(ctx, game, requestAnimationFrame)
 
-game.addPlayer({
-  playerId: 'player1',
-  playerX: 0,
-  playerY: 0
+const socket = io()
+
+socket.on("connect", () => {
+  const playerId = socket.id
+  console.log("Connected to server with player ID: ", playerId)
 })
 
-game.addFruit({
-  fruitId: 'fruit1',
-  fruitX: 2,
-  fruitY: 2
+socket.on("setup", (state) => {
+  console.log(state)
+  game.state = state
 })
-
-
-
-
-
-
-
