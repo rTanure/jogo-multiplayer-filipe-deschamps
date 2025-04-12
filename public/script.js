@@ -3,12 +3,9 @@ import createGame from './game.js';
 import renderScreen from './renderScreen.js';
 
 const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
 
 const game = createGame()
 const keyboardListener = createKeyboardListener()
-keyboardListener.subscribe(game.movePlayer)
-renderScreen(ctx, game, requestAnimationFrame)
 
 const socket = io()
 
@@ -20,7 +17,12 @@ socket.on("connect", () => {
 socket.on("setup", (state) => {
   console.log("Bootstrapping game state: ", state)
   game.setState(state)
+
+  
+  const ctx = canvas.getContext('2d');
+  renderScreen(ctx, game, requestAnimationFrame, socket.id)
   keyboardListener.setPlayerId(socket.id)
+  keyboardListener.subscribe(game.movePlayer)
 })
 
 socket.on("add-player", (command) => {

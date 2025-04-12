@@ -1,4 +1,4 @@
-export default function renderScreen(ctx, game, requestAnimationFrame) {
+export default function renderScreen(ctx, game, requestAnimationFrame, currentPlayerId) {
 
   ctx.fillStyle = "white"
   ctx.clearRect(0, 0, 10, 10)
@@ -15,7 +15,14 @@ export default function renderScreen(ctx, game, requestAnimationFrame) {
     ctx.fillRect(fruit.x, fruit.y, 1, 1)
   }
 
+  const currentPlayer = game.state.players[currentPlayerId]
+
+  if(currentPlayer) {
+    ctx.fillStyle = '#cccc00'
+    ctx.fillRect(currentPlayer.x, currentPlayer.y, 1, 1)
+  }
+
   requestAnimationFrame(() => {
-    renderScreen(ctx, game, requestAnimationFrame)
+    renderScreen(ctx, game, requestAnimationFrame, currentPlayerId)
   })
 }
