@@ -1,3 +1,5 @@
+// import { randomUUID } from "crypto"
+
 export default function createGame() {
   const state = {
     players: {},
@@ -9,6 +11,11 @@ export default function createGame() {
   }
 
   const observers = []
+
+  function start() {
+    const frequency = 2500
+    setInterval(addFruit, frequency)
+  }
 
   function subscribe(observeFunction) {
     observers.push(observeFunction)
@@ -49,19 +56,31 @@ export default function createGame() {
   }
 
   function addFruit(command) {
-    const fruitId = command.fruitId
-    const fruitX = command.fruitX
-    const fruitY = command.fruitY
+    const fruitId = command ? command.fruitId : Math.random().toString(36).substring(2, 15)
+    const fruitX = command ? command.fruitX : Math.floor(Math.random() * state.screen.width)
+    const fruitY = command ? command.fruitY : Math.floor(Math.random() * state.screen.height)
 
     state.fruits[fruitId] = {
       x: fruitX,
       y: fruitY
     }
+
+    notifyAll({
+      type: 'add-fruit',
+      fruitId: fruitId,
+      fruitX: fruitX,
+      fruitY: fruitY
+    })
   }
 
   function removeFruit(command) {
     const fruitId = command.fruitId
     delete state.fruits[fruitId]
+
+    notifyAll({
+      type: 'remove-fruit',
+      fruitId: fruitId
+    })
   }
 
   function setState(newState) {
@@ -114,6 +133,7 @@ export default function createGame() {
     removePlayer,
     state,
     subscribe,
-    setState
+    setState,
+    start
   }
 }

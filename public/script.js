@@ -43,3 +43,13 @@ socket.on("move-player", (command) => {
   if(command.playerId === socket.id) return
   game.movePlayer(command)
 })
+
+socket.on("add-fruit", (command) => {
+  console.log("Adding fruit: ", command)
+  game.addFruit(command)
+})
+
+socket.on("remove-fruit", (command) => {
+  console.log("Removing fruit: ", command)
+  game.removeFruit(command)
+})
