@@ -1,4 +1,5 @@
 export default function renderScreen(ctx, game, requestAnimationFrame) {
+
   ctx.fillStyle = "white"
   ctx.clearRect(0, 0, 10, 10)
 
