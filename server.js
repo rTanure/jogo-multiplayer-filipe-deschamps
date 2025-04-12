@@ -26,6 +26,13 @@ sockets.on('connection', (socket) => {
     game.removePlayer({playerId})
   })
 
+  socket.on('move-player', (command) => {
+    command.playerId = playerId
+    command.type = 'move-player'
+
+    game.movePlayer(command)
+  })
+
   socket.emit('setup', game.state)
 })
 

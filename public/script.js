@@ -23,6 +23,9 @@ socket.on("setup", (state) => {
   renderScreen(ctx, game, requestAnimationFrame, socket.id)
   keyboardListener.setPlayerId(socket.id)
   keyboardListener.subscribe(game.movePlayer)
+  keyboardListener.subscribe((command) => {
+    socket.emit('move-player', command)
+  })
 })
 
 socket.on("add-player", (command) => {
@@ -33,4 +36,10 @@ socket.on("add-player", (command) => {
 socket.on("remove-player", (command) => {
   console.log("Removing player: ", command)
   game.removePlayer(command)
+})
+
+socket.on("move-player", (command) => {
+  console.log("Moving player: ", command)
+  if(command.playerId === socket.id) return
+  game.movePlayer(command)
 })

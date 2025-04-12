@@ -69,6 +69,7 @@ export default function createGame() {
   }
 
   function movePlayer(command) {
+    notifyAll(command)
     const player = state.players[command.playerId]
 
     const acceptedMoves = {
@@ -90,7 +91,7 @@ export default function createGame() {
     if(moveFunction && player) {
       moveFunction(player)
       checkFruitCollision(command.playerId)
-    } 
+    }
   }
 
   function checkFruitCollision(playerId) {
