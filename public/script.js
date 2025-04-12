@@ -20,6 +20,7 @@ socket.on("connect", () => {
 socket.on("setup", (state) => {
   console.log("Bootstrapping game state: ", state)
   game.setState(state)
+  keyboardListener.setPlayerId(socket.id)
 })
 
 socket.on("add-player", (command) => {
