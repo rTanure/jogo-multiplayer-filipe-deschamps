@@ -26,3 +26,8 @@ socket.on("add-player", (command) => {
   console.log("Adding player: ", command)
   game.addPlayer(command)
 })
+
+socket.on("remove-player", (command) => {
+  console.log("Removing player: ", command)
+  game.removePlayer(command)
+})
