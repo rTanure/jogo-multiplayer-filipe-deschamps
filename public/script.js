@@ -16,6 +16,7 @@ game.addPlayer({
   playerX: 0,
   playerY: 0
 })
+
 game.addFruit({
   fruitId: 'fruit1',
   fruitX: 2,
