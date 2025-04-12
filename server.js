@@ -17,6 +17,11 @@ sockets.on('connection', (socket) => {
 
   game.addPlayer({playerId})
 
+  socket.on('disconnect', () => {
+    console.log('Player disconnected:', playerId)
+    game.removePlayer({playerId})
+  })
+
   socket.emit('setup', game.state)
 })
 
