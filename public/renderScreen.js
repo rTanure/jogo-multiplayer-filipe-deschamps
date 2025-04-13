@@ -5,13 +5,13 @@ export default function renderScreen(ctx, game, requestAnimationFrame, currentPl
 
   for(const playerId in game.state.players) {
     const player = game.state.players[playerId]
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = '#eee'
     ctx.fillRect(player.x, player.y, 1, 1)
   }
 
   for(const fruitId in game.state.fruits) {
     const fruit = game.state.fruits[fruitId]
-    ctx.fillStyle = 'green'
+    ctx.fillStyle = '#ff2222'
     ctx.fillRect(fruit.x, fruit.y, 1, 1)
   }
 

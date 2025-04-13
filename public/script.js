@@ -3,6 +3,30 @@ import createGame from './game.js';
 import renderScreen from './renderScreen.js';
 
 const canvas = document.getElementById('canvas');
+const btn_up = document.getElementById('btn_up');
+const btn_down = document.getElementById('btn_down');
+const btn_left = document.getElementById('btn_left');
+const btn_right = document.getElementById('btn_right');
+
+function simulateKey(key) {
+  const event = new KeyboardEvent('keydown', {
+    key: key,
+    code: key,
+    keyCode: key.startsWith('Arrow') ? 37 + ['Left', 'Up', 'Right', 'Down'].indexOf(key.replace('Arrow', '')) : 0,
+    which: key.startsWith('Arrow') ? 37 + ['Left', 'Up', 'Right', 'Down'].indexOf(key.replace('Arrow', '')) : 0,
+    bubbles: true
+  });
+  document.dispatchEvent(event);
+}
+
+// btn_up.addEventListener('touchstart', () => simulateKey('ArrowUp'));
+// btn_down.addEventListener('touchstart', () => simulateKey('ArrowDown'));
+// btn_left.addEventListener('touchstart', () => simulateKey('ArrowLeft'));
+// btn_right.addEventListener('touchstart', () => simulateKey('ArrowRight'));
+btn_up.addEventListener('click', () => simulateKey('ArrowUp'));
+btn_down.addEventListener('click', () => simulateKey('ArrowDown'));
+btn_left.addEventListener('click', () => simulateKey('ArrowLeft'));
+btn_right.addEventListener('click', () => simulateKey('ArrowRight'));
 
 const game = createGame()
 const keyboardListener = createKeyboardListener()
